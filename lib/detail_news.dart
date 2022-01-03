@@ -20,19 +20,6 @@ final String desc;
                 Text(desc)
               ],
             );
-          } else if(constraint.maxWidth <= 1200){
-            return Center(
-              child: Column(
-                children: [
-                  SizedBox(
-                    width: 300,
-                    height: 300,
-                    child: Image.network(imgNetwork,fit: BoxFit.fill,),
-                  ),
-                  Text(desc)
-                ],
-              ),
-            );
           } else {
             return Center(
               child: Column(
@@ -46,7 +33,6 @@ final String desc;
                 ],
               ),
             );
-
           }
         },
       ),
