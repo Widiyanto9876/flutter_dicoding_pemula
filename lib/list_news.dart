@@ -51,8 +51,7 @@ class ListNews extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start  ,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: 5.0, vertical: 10),
+                  padding: const EdgeInsets.all(5),
                   child: Text(
                     judul,
                     style:const TextStyle(

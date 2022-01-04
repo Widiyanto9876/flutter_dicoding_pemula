@@ -20,11 +20,14 @@ class _NewsPageState extends State<NewsPage> {
     HexColor("CA965C"),
     HexColor("#BADCE1"),
   ];
+  bool changeBackground = false;
 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(
+      backgroundColor:
+          changeBackground == false ? Colors.white : Colors.black54,
       body: SafeArea(
         bottom: false,
         child: Center(
@@ -32,9 +35,35 @@ class _NewsPageState extends State<NewsPage> {
             physics: ScrollPhysics(),
             child: Column(
               children: [
-                const Text(
-                  "All News",
-                  style: TextStyle(fontSize: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    SizedBox(),
+                    Text(
+                      "All News",
+                      style: TextStyle(
+                          color: changeBackground == false
+                              ? Colors.black
+                              : Colors.white,
+                          fontSize: 20),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(right: 10),
+                      child: InkWell(
+                          onTap: () {
+                            setState(() {
+                              changeBackground = !changeBackground;
+                            });
+                          },
+                          child: Icon(changeBackground == false
+                              ? Icons.light_mode_outlined
+                              : Icons.dark_mode,
+                            color: changeBackground == false
+                                ? Colors.black
+                                : Colors.white,
+                          )),
+                    )
+                  ],
                 ),
                 const SizedBox(
                   height: 10,
@@ -102,14 +131,13 @@ class _NewsPageState extends State<NewsPage> {
                           itemCount: _dataArticel.dataNews.length,
                           itemBuilder: (context, index) {
                             return InkWell(
-                              onTap: (){
-
+                              onTap: () {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => DetailNews(
-                                            imgNetwork:
-                                            _dataArticel.dataNews[index].img!,
+                                            imgNetwork: _dataArticel
+                                                .dataNews[index].img!,
                                             desc: _dataArticel
                                                 .dataNews[index].deskripsi!)));
                               },
@@ -118,7 +146,8 @@ class _NewsPageState extends State<NewsPage> {
                                   subJudul:
                                       _dataArticel.dataNews[index].subJudul!,
                                   colorBackground: _colors[index],
-                                  imgNetwork: _dataArticel.dataNews[index].img!),
+                                  imgNetwork:
+                                      _dataArticel.dataNews[index].img!),
                             );
                           });
                     } else if (constraint.maxWidth <= 1200) {
